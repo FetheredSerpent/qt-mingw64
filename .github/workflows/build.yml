@@ -135,7 +135,7 @@ jobs:
         shell: bash
         run: |
           export START_DIR=`pwd`
-          curl -o "alpine.tar.gz" "https://github.com/FetheredSerpent/qt-mingw64/releases/download/dependencies/alpine-minirootfs-3.19.1-x86_64.tar.gz"
+          curl -L -o "alpine.tar.gz" "https://github.com/FetheredSerpent/qt-mingw64/releases/download/dependencies/alpine-minirootfs-3.19.1-x86_64.tar.gz"
           curl -L -o qt-everywhere-src-6.5.2.tar.xz https://github.com/FetheredSerpent/qt-mingw64/releases/download/dependencies/qt-everywhere-src-6.5.2.tar.xz
           mkdir work
           tar -xf qt-everywhere-src-6.5.2.tar.xz -C work
