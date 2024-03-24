@@ -2,12 +2,13 @@
 
 export FULL_SOURCE_DIRECTORY=/work/qt-everywhere-src-6.5.2
 export BUILD_OUTPUT_DIR=/work/qt_release_lnx
+export PATH=$PATH:$BUILD_OUTPUT_DIR/bin
 
 function basic_build() {
     echo Preparing: $1
     cd $FULL_SOURCE_DIRECTORY/$1
     mkdir out && cd out
-    qt-configure-module ..
+    $BUILD_OUTPUT_DIR/bin/qt-configure-module ..
     cmake --build . --parallel
     cmake --install .
     cd $FULL_SOURCE_DIRECTORY
@@ -31,7 +32,7 @@ mkdir out && cd out
 ../configure --help
 ../configure -qt-zlib -qt-libjpeg -qt-libpng \
     -qt-freetype -qt-pcre -qt-harfbuzz -openssl-runtime \
-    -DQT_FEATURE_opengles2=ON -prefix %BUILD_OUTPUT_DIR% -release \
+    -DQT_FEATURE_opengles2=ON -prefix $BUILD_OUTPUT_DIR -release \
     -opensource -nomake examples -nomake tests -no-sql-psql\
     -bundled-xcb-xinput -DQT_FEATURE_libproxy=ON
 cmake --build . --parallel
