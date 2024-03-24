@@ -37,6 +37,8 @@ mkdir out && cd out
     -bundled-xcb-xinput -DQT_FEATURE_libproxy=ON
 cmake --build . --parallel
 cmake --install .
+cd $FULL_SOURCE_DIRECTORY
+rm -rf qtbase/out
 
 for module in qtimageformats qtlanguageserver qtshadertools qtsvg \
   qtdeclarative qtquicktimeline qtquick3d qtmultimedia qt3d qt5compat \
