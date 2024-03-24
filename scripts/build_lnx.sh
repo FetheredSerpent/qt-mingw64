@@ -21,7 +21,9 @@ apk add alpine-sdk cmake perl ninja-build ninja-is-really-ninja \
   openssl-dev ffmpeg-dev clang14-libclang glib-dev libx11-dev \
   libxfixes-dev libxi-dev libxext-dev libice-dev libsm-dev \
   libxrender-dev libxcb-dev xcb-util-renderutil-dev xcb-util-wm-dev \
-  xcb-util-keysyms-dev xcb-util-image-dev libxkbcommon-dev
+  xcb-util-keysyms-dev xcb-util-image-dev libxkbcommon-dev \
+  speech-dispatcher-dev flite-dev gstreamer-dev mesa-dev \
+  at-spi2-core-dev glib-dev
 
 cd $FULL_SOURCE_DIRECTORY
 cd qtbase
@@ -43,3 +45,6 @@ for module in qtimageformats qtlanguageserver qtshadertools qtsvg \
   
     basic_build $module
 done
+
+cd /tmp
+tar -czf qt_release_lnx.tar.gz alpine
