@@ -22,7 +22,8 @@ apk add alpine-sdk cmake perl ninja-build ninja-is-really-ninja \
   libxfixes-dev libxi-dev libxext-dev libice-dev libsm-dev \
   libxrender-dev libxcb-dev xcb-util-renderutil-dev xcb-util-wm-dev \
   xcb-util-keysyms-dev xcb-util-image-dev libxkbcommon-dev \
-  flite-dev gstreamer-dev mesa-dev at-spi2-core-dev glib-dev vulkan-headers
+  flite-dev gstreamer-dev mesa-dev at-spi2-core-dev glib-dev \
+  vulkan-headers libproxy
 
 cd $FULL_SOURCE_DIRECTORY
 cd qtbase
@@ -32,7 +33,7 @@ mkdir out && cd out
     -qt-freetype -qt-pcre -qt-harfbuzz -openssl-runtime \
     -DQT_FEATURE_opengles2=ON -prefix %BUILD_OUTPUT_DIR% -release \
     -opensource -nomake examples -nomake tests -no-sql-psql\
-    -bundled-xcb-xinput
+    -bundled-xcb-xinput -DQT_FEATURE_libproxy=ON
 cmake --build . --parallel
 cmake --install .
 
