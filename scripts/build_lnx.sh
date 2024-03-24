@@ -34,7 +34,7 @@ mkdir out && cd out
     -qt-freetype -qt-pcre -qt-harfbuzz -openssl-runtime \
     -DQT_FEATURE_opengles2=ON -prefix $BUILD_OUTPUT_DIR -release \
     -opensource -nomake examples -nomake tests -no-sql-psql\
-    -bundled-xcb-xinput -DQT_FEATURE_libproxy=ON
+    -bundled-xcb-xinput -DFEATURE_libproxy=ON -platform linux-g++-64
 cmake --build . --parallel
 cmake --install .
 cd $FULL_SOURCE_DIRECTORY
