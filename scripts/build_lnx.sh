@@ -10,7 +10,7 @@ function basic_build() {
     qt-configure-module ..
     cmake --build . --parallel
     cmake --install .
-    CD $FULL_SOURCE_DIRECTORY
+    cd $FULL_SOURCE_DIRECTORY
     rm -rf $1/out
 }
 
@@ -18,7 +18,10 @@ echo -e "nameserver 1.1.1.1\nnameserver 8.8.8.8\nnameserver 8.8.4.4\n" > /etc/re
 mkdir $BUILD_OUTPUT_DIR
 apk update
 apk add alpine-sdk cmake perl ninja-build ninja-is-really-ninja \
-  openssl-dev ffmpeg-dev clang14-libclang
+  openssl-dev ffmpeg-dev clang14-libclang glib-dev libx11-dev \
+  libxfixes-dev libxi-dev libxext-dev libice-dev libsm-dev \
+  libxrender-dev libxcb-dev xcb-util-renderutil-dev xcb-util-wm-dev \
+  xcb-util-keysyms-dev xcb-util-image-dev libxkbcommon-dev
 
 cd $FULL_SOURCE_DIRECTORY
 cd qtbase
@@ -27,7 +30,8 @@ mkdir out && cd out
 ../configure -qt-zlib -qt-libjpeg -qt-libpng \
     -qt-freetype -qt-pcre -qt-harfbuzz -openssl-runtime \
     -opengl dynamic -prefix %BUILD_OUTPUT_DIR% -release \
-    -opensource -nomake examples -nomake tests -no-sql-psql
+    -opensource -nomake examples -nomake tests -no-sql-psql\
+    -bundled-xcb-xinput
 
 for module in qtimageformats qtlanguageserver qtshadertools qtsvg \
   qtdeclarative qtquicktimeline qtquick3d qtmultimedia qt3d qt5compat \
@@ -37,5 +41,5 @@ for module in qtimageformats qtlanguageserver qtshadertools qtsvg \
   qtquickeffectmaker qtremoteobjects qtscxml qtsensors qtserialbus qtspeech \
   qttranslations qtvirtualkeyboard qtwayland qtwebview; do
   
-    basic_build module
+    basic_build $module
 done
