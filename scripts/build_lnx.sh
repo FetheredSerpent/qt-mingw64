@@ -22,8 +22,7 @@ apk add alpine-sdk cmake perl ninja-build ninja-is-really-ninja \
   libxfixes-dev libxi-dev libxext-dev libice-dev libsm-dev \
   libxrender-dev libxcb-dev xcb-util-renderutil-dev xcb-util-wm-dev \
   xcb-util-keysyms-dev xcb-util-image-dev libxkbcommon-dev \
-  speech-dispatcher-dev flite-dev gstreamer-dev mesa-dev \
-  at-spi2-core-dev glib-dev
+  flite-dev gstreamer-dev mesa-dev at-spi2-core-dev glib-dev
 
 cd $FULL_SOURCE_DIRECTORY
 cd qtbase
