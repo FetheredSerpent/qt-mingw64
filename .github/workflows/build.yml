@@ -138,13 +138,14 @@ jobs:
           curl -L -o "alpine.tar.gz" "https://github.com/FetheredSerpent/qt-mingw64/releases/download/dependencies/alpine-minirootfs-3.19.1-x86_64.tar.gz"
           curl -L -o qt-everywhere-src-6.5.2.tar.xz https://github.com/FetheredSerpent/qt-mingw64/releases/download/dependencies/qt-everywhere-src-6.5.2.tar.xz
           mkdir work
+          mkdir -p /tmp/alpine/work
+          
           tar -xf qt-everywhere-src-6.5.2.tar.xz -C work
           tar -xzf alpine.tar.gz -C /tmp/alpine
           
           rm -rf qt-everywhere-src-6.5.2.tar.xz
           rm -rf alpine.tar.gz
           
-          mkdir -p /tmp/alpine/work
           mount --bind $START_DIR/work /tmp/alpine/work
           mount --bind /dev /tmp/alpine/dev
           mount --bind /proc /tmp/alpine/proc
