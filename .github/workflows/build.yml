@@ -125,3 +125,38 @@ jobs:
       #   with:
       #     name: qt_release_mingw64_with_docs.tar.gz
       #     path: qt_release_mingw64_with_docs.tar.gz
+  build_release_lnx:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Fetch dependencies and build Qt
+        shell: bash
+        run: |
+          export START_DIR=`pwd`
+          curl -L -o "alpine.tar.gz" "https://github.com/FetheredSerpent/qt-mingw64/releases/download/dependencies/alpine-minirootfs-3.19.1-x86_64.tar.gz"
+          curl -L -o qt-everywhere-src-6.5.2.tar.xz https://github.com/FetheredSerpent/qt-mingw64/releases/download/dependencies/qt-everywhere-src-6.5.2.tar.xz
+          mkdir work
+          sudo mkdir -p /tmp/alpine/work
+          
+          tar -xf qt-everywhere-src-6.5.2.tar.xz -C work
+          sudo tar -xzf alpine.tar.gz -C /tmp/alpine
+          
+          rm -rf qt-everywhere-src-6.5.2.tar.xz
+          rm -rf alpine.tar.gz
+          
+          sudo mount --bind $START_DIR/work /tmp/alpine/work
+          sudo mount --bind /dev /tmp/alpine/dev
+          sudo mount --bind /proc /tmp/alpine/proc
+          sudo mount --bind /sys /tmp/alpine/sys
+          sudo cp scripts/build_lnx.sh /tmp/alpine
+          SHELL=/bin/sh PATH=$PATH:/bin:/sbin sudo chroot /tmp/alpine sh /build_lnx.sh
+          sudo cp /tmp/qt_release_lnx.tar.gz .
+          sudo chown `whoami` qt_release_lnx.tar.gz
+
+      - name: Upload Qt
+        uses: actions/upload-artifact@v3.1.3
+        with:
+          name: qt_release_lnx.tar.gz
+          path: qt_release_lnx.tar.gz
