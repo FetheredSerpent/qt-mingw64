@@ -138,20 +138,20 @@ jobs:
           curl -L -o "alpine.tar.gz" "https://github.com/FetheredSerpent/qt-mingw64/releases/download/dependencies/alpine-minirootfs-3.19.1-x86_64.tar.gz"
           curl -L -o qt-everywhere-src-6.5.2.tar.xz https://github.com/FetheredSerpent/qt-mingw64/releases/download/dependencies/qt-everywhere-src-6.5.2.tar.xz
           mkdir work
-          mkdir -p /tmp/alpine/work
+          sudo mkdir -p /tmp/alpine/work
           
           tar -xf qt-everywhere-src-6.5.2.tar.xz -C work
-          tar -xzf alpine.tar.gz -C /tmp/alpine
+          sudo tar -xzf alpine.tar.gz -C /tmp/alpine
           
           rm -rf qt-everywhere-src-6.5.2.tar.xz
           rm -rf alpine.tar.gz
           
-          mount --bind $START_DIR/work /tmp/alpine/work
-          mount --bind /dev /tmp/alpine/dev
-          mount --bind /proc /tmp/alpine/proc
-          mount --bind /sys /tmp/alpine/sys
-          cp scripts/build_lnx.sh /tmp/alpine
-          SHELL=/bin/sh PATH=$PATH:/bin:/sbin chroot /tmp/alpine sh /build_lnx.sh
+          sudo mount --bind $START_DIR/work /tmp/alpine/work
+          sudo mount --bind /dev /tmp/alpine/dev
+          sudo mount --bind /proc /tmp/alpine/proc
+          sudo mount --bind /sys /tmp/alpine/sys
+          sudo cp scripts/build_lnx.sh /tmp/alpine
+          SHELL=/bin/sh PATH=$PATH:/bin:/sbin sudo chroot /tmp/alpine sh /build_lnx.sh
 
       - name: Upload Qt
         uses: actions/upload-artifact@v3.1.3
