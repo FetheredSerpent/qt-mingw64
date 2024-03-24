@@ -152,7 +152,8 @@ jobs:
           sudo mount --bind /sys /tmp/alpine/sys
           sudo cp scripts/build_lnx.sh /tmp/alpine
           SHELL=/bin/sh PATH=$PATH:/bin:/sbin sudo chroot /tmp/alpine sh /build_lnx.sh
-          tar -czf qt_release_lnx.tar.gz /tmp/alpine
+          sudo cp /tmp/qt_release_lnx.tar.gz .
+          sudo chown `whoami` qt_release_lnx.tar.gz
 
       - name: Upload Qt
         uses: actions/upload-artifact@v3.1.3
