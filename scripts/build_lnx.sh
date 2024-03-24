@@ -33,6 +33,8 @@ mkdir out && cd out
     -DQT_FEATURE_opengles2=ON -prefix %BUILD_OUTPUT_DIR% -release \
     -opensource -nomake examples -nomake tests -no-sql-psql\
     -bundled-xcb-xinput
+cmake --build . --parallel
+cmake --install .
 
 for module in qtimageformats qtlanguageserver qtshadertools qtsvg \
   qtdeclarative qtquicktimeline qtquick3d qtmultimedia qt3d qt5compat \
