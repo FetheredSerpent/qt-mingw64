@@ -22,8 +22,7 @@ apk add alpine-sdk cmake perl ninja-build ninja-is-really-ninja \
   libxfixes-dev libxi-dev libxext-dev libice-dev libsm-dev \
   libxrender-dev libxcb-dev xcb-util-renderutil-dev xcb-util-wm-dev \
   xcb-util-keysyms-dev xcb-util-image-dev libxkbcommon-dev \
-  flite-dev gstreamer-dev mesa-dev at-spi2-core-dev glib-dev \
-  cups-dev dbus-dev double-conversion-dev eudev-dev fontconfig-dev freetype-dev glib-dev gtk+3.0-dev harfbuzz-dev icu-dev libb2-dev libinput-dev libjpeg-turbo-dev libpng-dev libpq-dev libproxy-dev libxkbcommon-dev mariadb-dev mesa-dev openssl-dev>3 pcre2-dev sqlite-dev tslib-dev unixodbc-dev vulkan-headers vulkan-loader-dev wayland-dev xcb-util-cursor-dev xcb-util-dev xcb-util-image-dev xcb-util-keysyms-dev xcb-util-renderutil-dev xcb-util-wm-dev zlib-dev 
+  flite-dev gstreamer-dev mesa-dev at-spi2-core-dev glib-dev vulkan-headers
 
 cd $FULL_SOURCE_DIRECTORY
 cd qtbase
@@ -31,7 +30,7 @@ mkdir out && cd out
 ../configure --help
 ../configure -qt-zlib -qt-libjpeg -qt-libpng \
     -qt-freetype -qt-pcre -qt-harfbuzz -openssl-runtime \
-    -opengl dynamic -prefix %BUILD_OUTPUT_DIR% -release \
+    -DQT_FEATURE_opengles2=ON -prefix %BUILD_OUTPUT_DIR% -release \
     -opensource -nomake examples -nomake tests -no-sql-psql\
     -bundled-xcb-xinput
 
